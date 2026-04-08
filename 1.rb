@@ -14,7 +14,7 @@ class Product
   end
 
   def to_s
-    "#{name} (\$#{'%.2f' % price})"
+    "#{name} ($#{'%.2f' % price})"
   end
 end
 
@@ -46,6 +46,30 @@ class Clothing < Product
   end
 end
 
+module So
+    def gretam
+        puts "Vannakaam"
+    end
+end
+
+class Person
+    def initialize(name,age)
+        @name=name
+        @age=age
+    end
+
+    def greet
+        puts "Hi I am #{@name}"
+    end
+end
+
+class Student < Person
+    def study
+        puts "#{@name} is Studying"
+    end
+    include So 
+end
+
 # Demonstration
 if __FILE__ == $0
   book  = Book.new(title: "The Ruby Way", price: 39.99, author: "Hal Fulton", isbn: "978-1593278231")
@@ -53,5 +77,10 @@ if __FILE__ == $0
 
   puts book
   puts shirt
+
+  p1=Student.new("Shaam",20)
+  p1.greet
+  p1.study
+  p1.gretam
 end
 ```
