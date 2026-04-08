@@ -1,0 +1,7 @@
+<h1>Add Discount</h1>
+
+<%= form_with model: [@project, @discount] do |f| %>
+  <p>Code: <%= f.text_field :code %></p>
+  <p>Percentage: <%= f.number_field :percentage %></p>
+  <%= f.submit %>
+<% end %>

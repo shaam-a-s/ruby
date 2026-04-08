@@ -1,0 +1,12 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.content %></p>
+
+<h3>Tags</h3>
+
+<%= link_to "Add Tag", new_post_tag_path(@post) %>
+
+<ul>
+  <% @tags.each do |tag| %>
+    <li><%= tag.name %></li>
+  <% end %>
+</ul>

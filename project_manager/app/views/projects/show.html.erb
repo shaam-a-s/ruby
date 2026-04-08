@@ -1,0 +1,16 @@
+<h1><%= @project.name %></h1>
+<p><%= @project.description %></p>
+
+<%= link_to "Add Task", new_project_task_path(@project) %>
+
+<h2>Tasks</h2>
+
+<%= link_to "All", project_tasks_path(@project) %> |
+<%= link_to "Completed", project_tasks_path(@project, status: "completed") %> |
+<%= link_to "Pending", project_tasks_path(@project, status: "pending") %>
+
+<ul>
+  <% @tasks.each do |t| %>
+    <li><%= t.title %> - <%= t.status %></li>
+  <% end %>
+</ul>

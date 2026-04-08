@@ -1,0 +1,12 @@
+<h1>New Post</h1>
+
+<%= form_with model: @post do |f| %>
+  <p>Title: <%= f.text_field :title %></p>
+  <p>Content: <%= f.text_area :content %></p>
+
+  <p>User:
+    <%= f.collection_select :user_id, @users, :id, :name %>
+  </p>
+
+  <%= f.submit %>
+<% end %>
