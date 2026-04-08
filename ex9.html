@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>All Tasks</title>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 20px;
+}
+
+/* Common */
+.section {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/* Inputs */
+input {
+    padding: 5px;
+    margin: 5px 0;
+}
+
+/* Buttons */
+button {
+    padding: 8px 12px;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: gray;
+}
+
+/* Highlight */
+.highlight {
+    background: yellow;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================== 1. FORM VALIDATION ================== -->
+<div class="section">
+<h2>1. Registration Form</h2>
+
+<form id="registerForm">
+    Username: <input type="text" id="username"><br>
+    Email: <input type="text" id="email"><br>
+    Password: <input type="password" id="password"><br>
+    Confirm Password: <input type="password" id="confirmPassword"><br>
+    <button type="submit">Register</button>
+</form>
+
+<p id="error" style="color:red;"></p>
+</div>
+
+<!-- ================== 2. QUIZ APP ================== -->
+<div class="section">
+<h2>2. Quiz App</h2>
+
+<div id="quiz"></div>
+<button onclick="submitQuiz()">Submit Quiz</button>
+<p id="result"></p>
+</div>
+
+<!-- ================== 3. TIMER ================== -->
+<div class="section">
+<h2>3. Countdown Timer</h2>
+
+<p id="timer">05:00</p>
+<button id="buyBtn">Buy Now</button>
+</div>
+
+<!-- ================== 4. SEARCH ================== -->
+<div class="section">
+<h2>4. Live Search</h2>
+
+<input type="text" id="search" placeholder="Search...">
+
+<ul id="list">
+  <li>JavaScript Tutorial</li>
+  <li>Learn HTML and CSS</li>
+  <li>jQuery Basics</li>
+  <li>Web Development Guide</li>
+</ul>
+</div>
+
+<script>
+/* ================== 1. FORM VALIDATION ================== */
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let username = document.getElementById("username").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    let error = "";
+
+    if (username.length < 5) {
+        error = "Username must be at least 5 characters";
+    }
+    else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        error = "Invalid email format";
+    }
+    else if (password.length < 8 || !/\d/.test(password)) {
+        error = "Password must be 8 characters and include a number";
+    }
+    else if (password !== confirmPassword) {
+        error = "Passwords do not match";
+    }
+
+    document.getElementById("error").innerText = error || "Form Submitted Successfully!";
+});
+
+/* ================== 2. QUIZ APP ================== */
+const questions = [
+  { question: "Capital of India?", options: ["Chennai", "Delhi", "Mumbai"], answer: "Delhi" },
+  { question: "2 + 2 = ?", options: ["3", "4", "5"], answer: "4" },
+  { question: "Sun rises in?", options: ["West", "East", "North"], answer: "East" }
+];
+
+let quizHTML = "";
+questions.forEach((q, index) => {
+  quizHTML += `<p>${q.question}</p>`;
+  q.options.forEach(opt => {
+    quizHTML += `<input type="radio" name="q${index}" value="${opt}"> ${opt}<br>`;
+  });
+});
+document.getElementById("quiz").innerHTML = quizHTML;
+
+function submitQuiz() {
+  let score = 0;
+
+  questions.forEach((q, index) => {
+    let selected = document.querySelector(`input[name="q${index}"]:checked`);
+    if (selected && selected.value === q.answer) score++;
+  });
+
+  document.getElementById("result").innerText =
+    "Score: " + score + "/" + questions.length;
+}
+
+/* ================== 3. TIMER ================== */
+let time = 300;
+
+let countdown = setInterval(function() {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    $("#timer").text(minutes + ":" + seconds);
+
+    time--;
+
+    if (time < 0) {
+        clearInterval(countdown);
+        $("#timer").text("Time Up!");
+        $("#buyBtn").prop("disabled", true);
+    }
+}, 1000);
+
+/* ================== 4. SEARCH ================== */
+$("#search").on("keyup", function() {
+    let value = $(this).val().toLowerCase();
+
+    $("#list li").each(function() {
+        let text = $(this).text();
+
+        if (text.toLowerCase().includes(value)) {
+            $(this).show();
+
+            let regex = new RegExp("(" + value + ")", "gi");
+            $(this).html(text.replace(regex, "<span class='highlight'>$1</span>"));
+        } else {
+            $(this).hide();
+        }
+    });
+});
+</script>
+
+</body>
+</html>
