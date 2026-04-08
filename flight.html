@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Booking Form</title>
+<style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    form { background: #fff; padding: 20px; border-radius: 8px; max-width: 400px; margin: auto; }
+    label { display: block; margin-top: 10px; }
+    .error { color: red; font-size: 0.9em; }
+    button { margin-top: 15px; padding: 10px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+</style>
+</head>
+<body>
+
+<h2>✈ Flight Booking Form</h2>
+<form id="flightForm">
+    <label>Full Name:
+        <input type="text" id="username" name="username" required>
+    </label>
+    <div class="error" id="nameError"></div>
+
+    <label>Choose Destinations:</label>
+    <label><input type="checkbox" name="destinations" value="Paris"> Paris</label>
+    <label><input type="checkbox" name="destinations" value="Dubai"> Dubai</label>
+    <label><input type="checkbox" name="destinations" value="Singapore"> Singapore</label>
+    <label><input type="checkbox" name="destinations" value="New York"> New York</label>
+    <div class="error" id="destError"></div>
+
+    <label>Travel Class:</label>
+    <label><input type="radio" name="class" value="Economy"> Economy</label>
+    <label><input type="radio" name="class" value="Business"> Business</label>
+    <label><input type="radio" name="class" value="First"> First</label>
+    <div class="error" id="classError"></div>
+
+    <button type="submit">Book Flight</button>
+</form>
+
+<div id="result"></div>
+
+<script>
+document.getElementById("flightForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Clear errors
+    document.getElementById("nameError").textContent = "";
+    document.getElementById("destError").textContent = "";
+    document.getElementById("classError").textContent = "";
+
+    let valid = true;
+    let username = document.getElementById("username").value.trim();
+    let destinations = [...document.querySelectorAll('input[name="destinations"]:checked')].map(cb => cb.value);
+    let travelClass = document.querySelector('input[name="class"]:checked');
+
+    // Validation
+    if (username.length < 2) {
+        document.getElementById("nameError").textContent = "Name must be at least 2 characters.";
+        valid = false;
+    }
+    if (destinations.length === 0) {
+        document.getElementById("destError").textContent = "Please select at least one destination.";
+        valid = false;
+    }
+    if (!travelClass) {
+        document.getElementById("classError").textContent = "Please select a travel class.";
+        valid = false;
+    }
+
+    if (!valid) return;
+
+    // AJAX Submission
+    fetch("https://example.com/book-flight", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            username: username,
+            destinations: destinations,
+            travelClass: travelClass.value
+        })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Server error. Please try again.");
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById("result").innerHTML = `<p style="color:green;">✅ Booking successful! Reference: ${data.ref}</p>`;
+    })
+    .catch(error => {
+        document.getElementById("result").innerHTML = `<p style="color:red;">❌ ${error.message}</p>`;
+    });
+});
+</script>
+
+</body>
+</html>

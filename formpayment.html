@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Form Validation</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 20px;
+    }
+    .form-container {
+        background: #fff;
+        padding: 20px;
+        max-width: 400px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .error {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 3px;
+    }
+    .radio-group {
+        margin-top: 10px;
+    }
+    .radio-group label {
+        font-weight: normal;
+        display: inline-block;
+        margin-right: 15px;
+    }
+    button {
+        margin-top: 15px;
+        padding: 10px;
+        width: 100%;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #218838;
+    }
+</style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Payment Form</h2>
+    <form id="paymentForm" novalidate>
+        <!-- Name Field -->
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name">
+        <div id="nameError" class="error"></div>
+
+        <!-- Payment Method -->
+        <label>Payment Method:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="payment" value="Credit Card"> Credit Card</label>
+            <label><input type="radio" name="payment" value="Debit Card"> Debit Card</label>
+            <label><input type="radio" name="payment" value="UPI"> UPI</label>
+            <label><input type="radio" name="payment" value="Net Banking"> Net Banking</label>
+        </div>
+        <div id="paymentError" class="error"></div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("paymentForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    let isValid = true;
+
+    // Clear previous errors
+    document.getElementById("nameError").textContent = "";
+    document.getElementById("paymentError").textContent = "";
+
+    // Validate Name
+    const name = document.getElementById("name").value.trim();
+    const namePattern = /^[A-Za-z\s]+$/; // Only letters and spaces
+    if (name === "") {
+        document.getElementById("nameError").textContent = "Name is required.";
+        isValid = false;
+    } else if (!namePattern.test(name)) {
+        document.getElementById("nameError").textContent = "Name can only contain letters and spaces.";
+        isValid = false;
+    }
+
+    // Validate Payment Method
+    const paymentSelected = document.querySelector('input[name="payment"]:checked');
+    if (!paymentSelected) {
+        document.getElementById("paymentError").textContent = "Please select a payment method.";
+        isValid = false;
+    }
+
+    // If valid, simulate form submission
+    if (isValid) {
+        alert("Form submitted successfully!\nName: " + name + "\nPayment Method: " + paymentSelected.value);
+        document.getElementById("paymentForm").reset();
+    }
+});
+</script>
+
+</body>
+</html>
