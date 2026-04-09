@@ -1,0 +1,62 @@
+College Api 
+add this part in the controller existing has only index and create
+
+
+module Api
+  class StudentsController < ApplicationController
+
+    # GET /api/students
+    def index
+      if params[:course]
+        students = Student.by_course(params[:course])
+      else
+        students = Student.all
+      end
+
+      render json: students
+    end
+
+    # GET /api/students/:id
+    def show
+      student = Student.find(params[:id])
+      render json: student
+    end
+
+    # POST /api/students
+    def create
+      student = Student.new(student_params)
+
+      if student.save
+        render json: student, status: :created
+      else
+        render json: { errors: student.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+
+    # PUT/PATCH /api/students/:id
+    def update
+      student = Student.find(params[:id])
+
+      if student.update(student_params)
+        render json: student
+      else
+        render json: { errors: student.errors.full_messages }
+      end
+    end
+
+    # DELETE /api/students/:id
+    def destroy
+      student = Student.find(params[:id])
+      student.destroy
+
+      render json: { message: "Deleted successfully" }
+    end
+
+    private
+
+    def student_params
+      params.require(:student).permit(:name, :email, :course, :year_of_study)
+    end
+
+  end
+end
