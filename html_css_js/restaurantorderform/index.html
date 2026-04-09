@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant Ordering Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Restaurant Ordering Form</h2>
+  <form id="orderForm">
+    <!-- Customer Name -->
+    <label for="customerName">Customer Name:</label>
+    <input type="text" id="customerName" name="customerName" required>
+    <br><br>
+
+    <!-- Menu Items -->
+    <p>Select Menu Items:</p>
+    <label><input type="checkbox" name="item" value="Pizza" data-price="250"> Pizza (₹250)</label><br>
+    <label><input type="checkbox" name="item" value="Burger" data-price="150"> Burger (₹150)</label><br>
+    <label><input type="checkbox" name="item" value="Pasta" data-price="200"> Pasta (₹200)</label><br>
+    <label><input type="checkbox" name="item" value="Salad" data-price="100"> Salad (₹100)</label><br><br>
+
+    <!-- Live Total -->
+    <p>Total Price: ₹<span id="totalPrice">0</span></p>
+
+    <!-- Order Type -->
+    <p>Order Type:</p>
+    <label><input type="radio" name="orderType" value="Pickup"> Pickup</label>
+    <label><input type="radio" name="orderType" value="Delivery"> Delivery</label><br><br>
+
+    <!-- Conditional Address -->
+    <div id="addressSection" style="display:none;">
+      <label for="address">Delivery Address:</label>
+      <input type="text" id="address" name="address">
+    </div>
+    <br>
+
+    <!-- Buttons -->
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+
+  <!-- Result -->
+  <div id="result"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

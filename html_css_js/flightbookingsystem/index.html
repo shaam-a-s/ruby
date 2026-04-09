@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flight Booking System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Flight Booking System</h2>
+  <form id="bookingForm">
+    <!-- Passenger Name -->
+    <label for="passengerName">Passenger Name:</label>
+    <input type="text" id="passengerName" name="passengerName" required>
+    <br><br>
+
+    <!-- Destination -->
+    <p>Select Destination:</p>
+    <label><input type="checkbox" name="destination" value="New York" data-price="500"> New York (Base ₹500)</label><br>
+    <label><input type="checkbox" name="destination" value="London" data-price="600"> London (Base ₹600)</label><br>
+    <label><input type="checkbox" name="destination" value="Tokyo" data-price="700"> Tokyo (Base ₹700)</label><br>
+    <label><input type="checkbox" name="destination" value="Sydney" data-price="800"> Sydney (Base ₹800)</label><br><br>
+
+    <!-- Travel Class -->
+    <p>Travel Class:</p>
+    <label><input type="radio" name="class" value="Economy" data-multiplier="1"> Economy</label>
+    <label><input type="radio" name="class" value="Business" data-multiplier="1.5"> Business</label>
+    <label><input type="radio" name="class" value="First" data-multiplier="2"> First</label><br><br>
+
+    <!-- Seat Preference (conditional) -->
+    <div id="seatSection" style="display:none;">
+      <label for="seatPref">Seat Preference:</label>
+      <select id="seatPref" name="seatPref">
+        <option value="">--Select--</option>
+        <option value="Window">Window</option>
+        <option value="Aisle">Aisle</option>
+        <option value="Middle">Middle</option>
+      </select>
+    </div>
+    <br>
+
+    <!-- Dynamic Price -->
+    <p>Total Price: ₹<span id="totalPrice">0</span></p>
+
+    <!-- Buttons -->
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+
+  <!-- Result -->
+  <div id="result"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

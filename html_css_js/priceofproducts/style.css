@@ -1,0 +1,63 @@
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background: #f4f4f4;
+    }
+    .container {
+        max-width: 500px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    .product {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #ddd;
+    }
+    .total {
+        font-weight: bold;
+        margin-top: 10px;
+        text-align: right;
+    }
+    .payment-section {
+        margin-top: 20px;
+    }
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+    }
+    input[type="text"], input[type="number"], input[type="month"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    button {
+        margin-top: 15px;
+        width: 100%;
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #218838;
+    }
+    .message {
+        margin-top: 15px;
+        text-align: center;
+        font-weight: bold;
+    }

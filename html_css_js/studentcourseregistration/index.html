@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Registration</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Student Course Registration</h2>
+  <form id="registrationForm">
+    <!-- Name -->
+    <label for="studentName">Name:</label>
+    <input type="text" id="studentName" name="studentName" required>
+    <br><br>
+
+    <!-- Courses -->
+    <p>Select Courses (checkboxes):</p>
+    <label><input type="checkbox" name="course" value="Math" data-credits="3"> Math (3 credits)</label><br>
+    <label><input type="checkbox" name="course" value="Science" data-credits="4"> Science (4 credits)</label><br>
+    <label><input type="checkbox" name="course" value="History" data-credits="2"> History (2 credits)</label><br>
+    <label><input type="checkbox" name="course" value="Art" data-credits="1"> Art (1 credit)</label><br><br>
+
+    <!-- Semester -->
+    <p>Select Semester (radio buttons):</p>
+    <label><input type="radio" name="semester" value="Fall"> Fall</label>
+    <label><input type="radio" name="semester" value="Winter"> Winter</label>
+    <label><input type="radio" name="semester" value="Spring"> Spring</label><br><br>
+
+    <!-- Conditional timings -->
+    <div id="timingSection" style="display:none;">
+      <label for="timing">Preferred Class Timing (Fall only):</label>
+      <select id="timing" name="timing">
+        <option value="">--Select--</option>
+        <option value="Morning">Morning</option>
+        <option value="Afternoon">Afternoon</option>
+        <option value="Evening">Evening</option>
+      </select>
+    </div>
+    <br>
+
+    <!-- Buttons -->
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+  </form>
+
+  <!-- Result -->
+  <div id="result"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

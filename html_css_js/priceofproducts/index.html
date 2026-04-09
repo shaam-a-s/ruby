@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Order Form</title>
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<h2>Product Order Form</h2>
+
+<form id="orderForm">
+    <div class="product-list">
+        <label class="product-item">
+            <input type="checkbox" class="product" value="500"> Product A - ₹500
+        </label>
+        <label class="product-item">
+            <input type="checkbox" class="product" value="750"> Product B - ₹750
+        </label>
+        <label class="product-item">
+            <input type="checkbox" class="product" value="1200"> Product C - ₹1200
+        </label>
+    </div>
+
+    <div class="total">Total: ₹<span id="totalPrice">0</span></div>
+
+    <h3>Payment Method - Credit Card</h3>
+    <input type="text" id="cardNumber" placeholder="Card Number (16 digits)" maxlength="16"><br>
+    <input type="month" id="expiryDate"><br>
+    <input type="number" id="cvv" placeholder="CVV" maxlength="3"><br>
+    <div id="errorMsg" class="error"></div>
+
+    <button type="submit">Submit Payment</button>
+</form>
+
+<script src="script.js">
+</script>
+
+</body>
+</html>
