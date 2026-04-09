@@ -1,0 +1,11 @@
+<h1>Comment Details</h1>
+
+<p><strong>Title:</strong> <%= @comment.title %></p>
+<p><strong>By:</strong> <%= @comment.user.name %></p>
+<p><strong>Recipe:</strong> <%= link_to @recipe.title, recipe_path(@recipe) %></p>
+
+<p>
+  <%= link_to "Edit", edit_recipe_comment_path(@recipe, @comment) %> |
+  <%= link_to "Delete", recipe_comment_path(@recipe, @comment), method: :delete, data: { confirm: "Delete this comment?" } %> |
+  <%= link_to "Back to Comments", recipe_comments_path(@recipe) %>
+</p>

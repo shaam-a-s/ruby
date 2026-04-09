@@ -1,0 +1,5 @@
+<h1>Edit Comment for <%= @recipe.title %></h1>
+
+<%= render "form", comment: @comment, recipe: @recipe, users: @users %>
+
+<p><%= link_to "Back to Comment", recipe_comment_path(@recipe, @comment) %></p>

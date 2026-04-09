@@ -1,0 +1,12 @@
+<h1>All Users</h1>
+
+<p><%= link_to "New User", new_user_path %> | <%= link_to "All Recipes", recipes_path %></p>
+
+<% @users.each do |user| %>
+  <div>
+    <h3><%= link_to user.name, user_path(user) %></h3>
+    <p><strong>Email:</strong> <%= user.email %></p>
+    <p><strong>Recipes:</strong> <%= user.recipes.count %> | <strong>Comments:</strong> <%= user.comments.count %></p>
+  </div>
+  <hr>
+<% end %>

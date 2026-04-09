@@ -1,0 +1,37 @@
+<h1><%= @user.name %></h1>
+<p><strong>Email:</strong> <%= @user.email %></p>
+
+<p>
+  <%= link_to "Edit", edit_user_path(@user) %> |
+  <%= link_to "Delete", user_path(@user), method: :delete, data: { confirm: "Delete this user?" } %> |
+  <%= link_to "Back to Users", users_path %>
+</p>
+
+<hr>
+
+<h3>Recipes by <%= @user.name %></h3>
+<% if @user.recipes.any? %>
+  <ul>
+    <% @user.recipes.each do |recipe| %>
+      <li><%= link_to recipe.title, recipe_path(recipe) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No recipes yet.</p>
+<% end %>
+
+<hr>
+
+<h3>Comments by <%= @user.name %></h3>
+<% if @user.comments.any? %>
+  <ul>
+    <% @user.comments.each do |comment| %>
+      <li>
+        <%= link_to comment.title, recipe_comment_path(comment.recipe, comment) %>
+        (on <%= link_to comment.recipe.title, recipe_path(comment.recipe) %>)
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No comments yet.</p>
+<% end %>

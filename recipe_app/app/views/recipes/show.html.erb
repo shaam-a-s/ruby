@@ -1,0 +1,35 @@
+<h2><%= @recipe.title %></h2>
+<p><strong>Ingredients:</strong> <%= @recipe.ingredients %></p>
+<p><strong>Created by:</strong> <%= @recipe.user.name %></p>
+
+<p>
+  <%= link_to "Edit Recipe", edit_recipe_path(@recipe) %> |
+  <%= link_to "Delete Recipe", recipe_path(@recipe), method: :delete, data: { confirm: "Delete this recipe?" } %> |
+  <%= link_to "Back to Recipes", recipes_path %>
+</p>
+
+<hr>
+
+<h3>Comments</h3>
+<% if @recipe.comments.any? %>
+  <% @recipe.comments.includes(:user).each do |comment| %>
+    <div>
+      <p><strong><%= comment.user.name %>:</strong> <%= comment.title %></p>
+      <p>
+        <%= link_to "View", recipe_comment_path(@recipe, comment) %> |
+        <%= link_to "Edit", edit_recipe_comment_path(@recipe, comment) %> |
+        <%= link_to "Delete", recipe_comment_path(@recipe, comment), method: :delete, data: { confirm: "Delete this comment?" } %>
+      </p>
+    </div>
+    <hr>
+  <% end %>
+<% else %>
+  <p>No comments yet.</p>
+<% end %>
+
+<p><%= link_to "Add Comment", new_recipe_comment_path(@recipe) %></p>
+
+<hr>
+
+<h3>Add Comment</h3>
+<%= render "comments/form", comment: @comment, recipe: @recipe, users: @users %>
