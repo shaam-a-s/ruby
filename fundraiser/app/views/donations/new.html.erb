@@ -1,0 +1,6 @@
+<h1>Add Donation</h1>
+
+<%= form_with model: [@project, @donation] do |f| %>
+  <p>Amount: <%= f.number_field :amount %></p>
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,21 @@
+<h1><%= @project.name %></h1>
+<p><%= @project.description %></p>
+<p>Goal: <%= @project.goal %></p>
+
+<h2>Donations</h2>
+<%= link_to "Add Donation", new_project_donation_path(@project) %>
+
+<ul>
+  <% @donations.each do |d| %>
+    <li><%= d.amount %></li>
+  <% end %>
+</ul>
+
+<h2>Discounts</h2>
+<%= link_to "Add Discount", new_project_discount_path(@project) %>
+
+<ul>
+  <% @discounts.each do |d| %>
+    <li><%= d.code %> - <%= d.percentage %>%</li>
+  <% end %>
+</ul>

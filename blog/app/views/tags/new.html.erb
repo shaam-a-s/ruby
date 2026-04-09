@@ -1,0 +1,6 @@
+<h1>Add Tag</h1>
+
+<%= form_with model: [@post, @tag] do |f| %>
+  <p>Name: <%= f.text_field :name %></p>
+  <%= f.submit %>
+<% end %>

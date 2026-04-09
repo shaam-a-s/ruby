@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Form Validation Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .error { color: red; font-size: 0.9em; }
+        input { display: block; margin-bottom: 10px; padding: 8px; width: 250px; }
+        button { padding: 8px 15px; }
+    </style>
+</head>
+<body>
+
+<h2>Registration Form</h2>
+<form id="myForm" novalidate>
+    <label>Full Name:</label>
+    <input type="text" id="name" name="name">
+    <span class="error" id="nameError"></span>
+
+    <label>Email:</label>
+    <input type="email" id="email" name="email">
+    <span class="error" id="emailError"></span>
+
+    <label>Password:</label>
+    <input type="password" id="password" name="password">
+    <span class="error" id="passwordError"></span>
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent form from submitting until validated
+
+    // Clear previous errors
+    document.getElementById("nameError").textContent = "";
+    document.getElementById("emailError").textContent = "";
+    document.getElementById("passwordError").textContent = "";
+
+    let isValid = true;
+
+    // Name validation
+    const name = document.getElementById("name").value.trim();
+    if (name === "") {
+        document.getElementById("nameError").textContent = "Name is required.";
+        isValid = false;
+    }
+
+    // Email validation
+    const email = document.getElementById("email").value.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === "") {
+        document.getElementById("emailError").textContent = "Email is required.";
+        isValid = false;
+    } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "Enter a valid email address.";
+        isValid = false;
+    }
+
+    // Password validation
+    const password = document.getElementById("password").value;
+    if (password === "") {
+        document.getElementById("passwordError").textContent = "Password is required.";
+        isValid = false;
+    } else if (password.length < 6) {
+        document.getElementById("passwordError").textContent = "Password must be at least 6 characters.";
+        isValid = false;
+    }
+
+    // If all validations pass, submit the form
+    if (isValid) {
+        alert("Form submitted successfully!");
+        this.submit();
+    }
+});
+</script>
+
+</body>
+</html>
