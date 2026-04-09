@@ -1,0 +1,44 @@
+<%= link_to "← Back to Projects", projects_path %>
+<%= link_to "New Project", new_project_path %>
+<h1><%= @project.name %></h1>
+
+<div style="display:flex; gap:20px;">
+  <% ["todo","ongoing","completed"].each do |status| %>
+    
+    <div style="width:30%; border:1px solid black; padding:10px;">
+      <h3><%= status.capitalize %></h3>
+
+      <!-- COLUMN -->
+      <div class="column" 
+           data-status="<%= status %>" 
+           data-project-id="<%= @project.id %>" 
+           style="min-height:200px;">
+
+        <% @tasks.where(status: status).each do |task| %>
+          
+          <!-- TASK -->
+          <div class="task" 
+               draggable="true" 
+               data-id="<%= task.id %>" 
+               style="border:1px solid gray; padding:5px; margin:5px; cursor:grab;">
+
+            <p><%= task.name %> (<%= task.priority %>)</p>
+
+            <%= button_to "Delete", project_task_path(@project, task), method: :delete %>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
+
+<h3>Add Task</h3>
+
+<%= form_with model: [@project, Task.new] do |f| %>
+  <%= f.text_field :name, placeholder: "Task name" %>
+  <%= f.select :status, ["todo","ongoing","completed"] %>
+  <%= f.select :priority, ["low","medium","high"] %>
+  <%= f.submit "Create Task" %>
+<% end %>

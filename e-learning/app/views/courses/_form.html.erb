@@ -1,0 +1,26 @@
+<%= form_with model: @course, local: true do |form| %>
+  <% if @course.errors.any? %>
+    <div>
+      <h3><%= pluralize(@course.errors.count, "error") %> prevented saving:</h3>
+      <ul>
+        <% @course.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name, required: true %>
+  </p>
+
+  <p>
+    <%= form.label :instructor %><br>
+    <%= form.text_field :instructor, required: true %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

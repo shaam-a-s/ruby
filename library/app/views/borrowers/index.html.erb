@@ -1,0 +1,22 @@
+<h1>Borrowers</h1>
+
+<%= link_to "Add Borrower", new_borrower_path %>
+
+<table border="1">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+
+  <% @borrowers.each do |b| %>
+    <tr>
+      <td><%= b.name %></td>
+      <td><%= b.email %></td>
+      <td>
+        <%= link_to "Edit", edit_borrower_path(b) %>
+        <%= link_to "Delete", borrower_path(b), method: :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>

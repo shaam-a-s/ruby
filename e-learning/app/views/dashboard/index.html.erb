@@ -1,0 +1,41 @@
+<h1>E-Learning Dashboard</h1>
+
+<h2>Enroll Student In Course</h2>
+<%= form_with url: enrollments_path, method: :post, local: true do |form| %>
+  <p>
+    <%= form.label :student_id, "Student" %><br>
+    <%= form.collection_select :student_id, @students, :id, :name, { prompt: "Select student" }, { required: true } %>
+  </p>
+
+  <p>
+    <%= form.label :course_id, "Course" %><br>
+    <%= form.collection_select :course_id, @courses, :id, :name, { prompt: "Select course" }, { required: true } %>
+  </p>
+
+  <p><%= form.submit "Enroll" %></p>
+<% end %>
+
+<h2>All Students</h2>
+<ul>
+  <% @students.each do |student| %>
+    <li><%= student.name %> (<%= student.email %>)</li>
+  <% end %>
+</ul>
+
+<h2>All Courses</h2>
+<ul>
+  <% @courses.each do |course| %>
+    <li><%= course.name %> by <%= course.instructor %></li>
+  <% end %>
+</ul>
+
+<h2>All Lessons</h2>
+<ul>
+  <% @lessons.each do |lesson| %>
+    <li>
+      <strong><%= lesson.name %></strong>
+      (<%= lesson.course.name %>)
+      - <%= lesson.description %>
+    </li>
+  <% end %>
+</ul>

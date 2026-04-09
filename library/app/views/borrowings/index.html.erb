@@ -1,0 +1,17 @@
+<h1>Borrowed Books</h1>
+
+<table border="1">
+  <tr>
+    <th>Book</th>
+    <th>Borrower</th>
+    <th>Date</th>
+  </tr>
+
+  <% @borrowings.each do |b| %>
+    <tr>
+      <td><%= b.book.title %></td>
+      <td><%= b.borrower.name %></td>
+      <td><%= b.borrowed_on %></td>
+    </tr>
+  <% end %>
+</table>

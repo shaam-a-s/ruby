@@ -1,0 +1,28 @@
+<h1>Lessons</h1>
+
+<p><%= link_to "New Lesson", new_lesson_path %></p>
+
+<table border="1" cellpadding="6">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Course</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lessons.each do |lesson| %>
+      <tr>
+        <td><%= lesson.name %></td>
+        <td><%= lesson.description %></td>
+        <td><%= lesson.course.name %></td>
+        <td>
+          <%= link_to "Show", lesson_path(lesson) %> |
+          <%= link_to "Edit", edit_lesson_path(lesson) %> |
+          <%= button_to "Delete", lesson_path(lesson), method: :delete, data: { turbo_confirm: "Delete this lesson?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

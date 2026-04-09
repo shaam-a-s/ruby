@@ -1,0 +1,7 @@
+<h1>Book Details</h1>
+
+<p><b>Title:</b> <%= @book.title %></p>
+<p><b>Author:</b> <%= @book.author %></p>
+<p><b>Status:</b> <%= @book.available ? "Available" : "Borrowed" %></p>
+
+<%= link_to "Back", books_path %>
