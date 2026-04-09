@@ -1,0 +1,8 @@
+{
+  "length": {
+    "meter_to_kilometer": 0.001
+  },
+  "weight": {
+    "gram_to_kilogram": 0.001
+  }
+}
