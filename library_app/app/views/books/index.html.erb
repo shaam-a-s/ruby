@@ -1,0 +1,27 @@
+<h1>Books List</h1>
+
+<%= link_to "Add Book", new_book_path %>
+
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Availability</th>
+    <th>Action</th>
+  </tr>
+
+  <% @books.each do |book| %>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.author %></td>
+      <td><%= book.availability %></td>
+      <td>
+        <% if book.availability %>
+          <%= button_to "Borrow", borrow_book_path(book), method: :patch %>
+        <% else %>
+          <%= button_to "Return", return_book_book_path(book), method: :patch %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,1 @@
+Invoke-RestMethod -Method POST -Uri "http://localhost:3000/api/students" -Headers @{ "Content-Type"="application/json" } -Body '{"student":{"name":"Shaam","email":"shaam@gmail.com","course":"ECE","year_of_study":3}}'
